@@ -8,7 +8,7 @@ body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:var(--
 .btn-farmacia:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(74,111,165,.4);color:#fff}
 .btn-outline-farmacia{border:2px solid var(--primary-color);color:var(--primary-color);border-radius:30px;padding:10px 25px;font-weight:600;transition:all .3s}
 .btn-outline-farmacia:hover{background:linear-gradient(to right,var(--primary-color),var(--secondary-color));color:#fff;transform:translateY(-3px)}
-.card{transition:all .3s ease;border:none;border-radius:15px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,.08);height:100%}
+.card{transition:all .3s ease;border:none;border-radius:15px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,.08);min-height:auto;max-height:600px}
 .card:hover{transform:translateY(-10px);box-shadow:0 15px 30px rgba(0,0,0,.15)}
 .card-img-top{height:200px;object-fit:cover;transition:transform .5s}.card:hover .card-img-top{transform:scale(1.05)}
 .card-title{color:var(--primary-color);font-weight:600}
@@ -22,4 +22,8 @@ body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:var(--
 .offer-badge{position:absolute;top:15px;right:15px;z-index:1;border-radius:20px;padding:5px 15px;font-weight:600;background:linear-gradient(to right,#ff6b6b,#ff9e7d)}
 .testimonial-card{border-left:4px solid var(--primary-color)}
 .newsletter-section{background:linear-gradient(rgba(74,111,165,.9),rgba(108,155,207,.9)),url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1350&q=80');background-size:cover;background-attachment:fixed;padding:5rem 0;color:#fff}
-@media(max-width:768px){.hero-section{padding:4rem 0}.feature-icon{width:60px;height:60px;font-size:24px}}
+.modal-dialog{max-width:400px;margin:1.75rem auto}.modal-content{max-height:80vh;overflow-y:auto}
+.alert{max-width:500px;margin:0 auto 2rem auto}
+.card.h-100{max-height:500px;height:auto;min-height:280px}
+.card.testi-card{max-height:350px}
+@media(max-width:768px){.hero-section{padding:4rem 0}.feature-icon{width:60px;height:60px;font-size:24px}.card{max-height:400px}}
