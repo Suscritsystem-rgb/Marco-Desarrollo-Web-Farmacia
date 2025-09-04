@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const db = require("./database"); // Importa la instancia de la base de datos
 const fetch = require("node-fetch"); // Para llamadas a la API externa
 
@@ -8,6 +9,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+
+// Servir archivos estáticos del frontend
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Ruta para validar stock de medicamentos
 app.post("/validar-stock", (req, res) => {
@@ -85,6 +89,11 @@ app.post("/normalizar-receta", async (req, res) => {
     console.error("Error al normalizar receta con IA:", error);
     res.status(500).json({ error: "Error interno del servidor al procesar IA." });
   }
+});
+
+// Ruta para servir la página principal
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 app.listen(PORT, () => {
