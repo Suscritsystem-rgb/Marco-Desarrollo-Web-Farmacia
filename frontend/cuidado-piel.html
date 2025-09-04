@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cuidado de la Piel - FarmaJoven</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="./assets/global.css">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6c9bcf;
+            --accent-color: #ff85a2;
+            --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-text);
+            background-color: #fff;
+        }
+        
+        /* Navbar con gradiente */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+        
+        /* Encabezado con efecto parallax */
+        .category-header {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+                        url('https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            padding: 4rem 0;
+            position: relative;
+        }
+        
+        /* Botones con transición */
+        .btn-farmacia {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 25px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(74, 111, 165, 0.3);
+        }
+        
+        .btn-farmacia:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 111, 165, 0.4);
+            color: white;
+        }
+        
+        /* Cards con efecto de elevación */
+        .card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        
+        .card-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* Badges de promoción */
+        .badge-promo {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 1;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-weight: 600;
+        }
+        
+        /* Filtros con estilo mejorado */
+        .filter-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .filter-card .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            border: none;
+        }
+        
+        /* Iconos decorativos */
+        .decorative-icon {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+        }
+        
+        /* Footer mejorado */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        /* Breadcrumb personalizado */
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        /* Títulos sección */
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+        }
+        
+        /* Efectos de hover en productos */
+        .product-price {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        /* Modal personalizado */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            border: none;
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadein {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .category-header {
+                background-attachment: scroll;
+            }
+            
+            .decorative-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar con menú desplegable -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-spa me-2"></i><strong>FarmaJoven</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="medicamentos.html">Medicamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cuidado-personal.html">Cuidado Personal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="vitaminas.html">Vitaminas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cuidado-piel.html">Cuidado de la Piel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contacto"><i class="fas fa-phone-alt me-1"></i> Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Encabezado de categoría con efecto parallax -->
+    <div class="category-header">
+        <div class="container text-center animate-fadein">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Cuidado de la Piel</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">Cuidado de la Piel</h1>
+            <p class="lead mb-4">Descubre los mejores productos para realzar tu belleza natural y mantener tu piel saludable.</p>
+            <a href="#productos" class="btn btn-farmacia">
+                <i class="fas fa-arrow-down me-2"></i>Ver Productos
+            </a>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <section id="productos" class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title">Productos para el Cuidado de tu Piel</h2>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <!-- Filtros con diseño mejorado -->
+                    <div class="card filter-card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Filtrar Productos</h5>
+                        </div>
+                        <div class="card-body">
+                            <h6><i class="fas fa-tags me-2"></i>Categorías</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoria1">
+                                <label class="form-check-label" for="categoria1">Crema Hidratante</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoria2">
+                                <label class="form-check-label" for="categoria2">Protector Solar</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoria3">
+                                <label class="form-check-label" for="categoria3">Serum Facial</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoria4">
+                                <label class="form-check-label" for="categoria4">Limpiadores</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoria5">
+                                <label class="form-check-label" for="categoria5">Mascarillas</label>
+                            </div>
+                            
+                            <hr>
+                            
+                            <h6><i class="fas fa-star me-2"></i>Marca</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="marca1">
+                                <label class="form-check-label" for="marca1">La Roche-Posay</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="marca2">
+                                <label class="form-check-label" for="marca2">Cetaphil</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="marca3">
+                                <label class="form-check-label" for="marca3">Neutrogena</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="marca4">
+                                <label class="form-check-label" for="marca4">Vichy</label>
+                            </div>
+                            
+                            <hr>
+                            
+                            <h6><i class="fas fa-dollar-sign me-2"></i>Precio</h6>
+                            <input type="range" class="form-range" id="priceRange">
+                            <div class="d-flex justify-content-between">
+                                <small>$5</small>
+                                <small>$50</small>
+                            </div>
+                            
+                            <button class="btn btn-farmacia w-100 mt-3">
+                                <i class="fas fa-check me-2"></i>Aplicar Filtros
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Banner promocional -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body text-center py-4">
+                            <div class="text-primary mb-3">
+                                <i class="fas fa-gift fa-2x"></i>
+                            </div>
+                            <h5>¡Oferta Especial!</h5>
+                            <p class="small">2da unidad al 50% en productos seleccionados</p>
+                            <button class="btn btn-sm btn-outline-primary">Ver ofertas</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tip del día -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h6><i class="fas fa-lightbulb text-warning me-2"></i>Tip del Día</h6>
+                            <p class="small">Aplica protector solar todos los días, incluso cuando está nublado. ¡Tu piel te lo agradecerá!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-9">
+                    <!-- Barra de herramientas -->
+                    <div class="d-flex justify-content-between align-items-center mb-4 bg-light p-3 rounded shadow-sm">
+                        <p class="mb-0"><span class="badge bg-primary">12</span> productos encontrados</p>
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <select class="form-select form-select-sm">
+                                    <option>Ordenar por: Más relevantes</option>
+                                    <option>Precio: menor a mayor</option>
+                                    <option>Precio: mayor a menor</option>
+                                    <option>Nombre A-Z</option>
+                                    <option>Mejor valorados</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-grid"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Lista de productos -->
+                    <div class="row">
+                        <!-- Producto 1 -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <span class="badge bg-danger badge-promo">-25%</span>
+                                <img src="https://perufarma.com.pe/wp-content/uploads/2024/04/Hyaluron-1000x1000-1.png" class="card-img-top" alt="Crema Hidratante">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h5 class="card-title">Crema Hidratante Facial</h5>
+                                        <span class="text-warning small"><i class="fas fa-star"></i> 4.8</span>
+                                    </div>
+                                    <p class="card-text">Hidratación intensiva 24h para todo tipo de piel. Con ácido hialurónico.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="text-muted text-decoration-line-through">$24.99</span>
+                                            <span class="product-price ms-2">$18.74</span>
+                                        </div>
+                                        <button class="btn btn-sm btn-farmacia">Añadir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 2 -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6gmVxDA90yMmi9ltCHy0bXjU11qogZ5oEjA&s" class="card-img-top" alt="Protector Solar">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h5 class="card-title">Protector Solar FPS 50+</h5>
+                                        <span class="text-warning small"><i class="fas fa-star"></i> 4.9</span>
+                                    </div>
+                                    <p class="card-text">Protección avanzada contra UVA/UVB. Resistente al agua y al sudor.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="product-price">$16.50</span>
+                                        <button class="btn btn-sm btn-farmacia">Añadir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 3 -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <span class="badge bg-success badge-promo">Nuevo</span>
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijcN7Bougr6lFdVFYNKPiPQdiMuEF5_eUgg&s" class="card-img-top" alt="Serum Facial">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h5 class="card-title">Serum Vitamina C</h5>
+                                        <span class="text-warning small"><i class="fas fa-star"></i> 4.7</span>
+                                    </div>
+                                    <p class="card-text">Antioxidante que ilumina la piel y reduce signos de envejecimiento.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="product-price">$29.99</span>
+                                        <button class="btn btn-sm btn-farmacia">Añadir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 4 -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://www.cerave.pe/-/media/project/loreal/brand-sites/cerave/americas/pe/new_product/new_product_700x875/limpieza/gel-limpiador-espumoso-236ml/3337875597197_7.jpg?rev=-1" class="card-img-top" alt="Limpiador Facial">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h5 class="card-title">Limpiador Facial Suave</h5>
+                                        <span class="text-warning small"><i class="fas fa-star"></i> 4.6</span>
+                                    </div>
+                                    <p class="card-text">Limpiador sin jabón para piel sensible. Remueve impurezas sin irritar.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="product-price">$12.75</span>
+                                        <button class="btn btn-sm btn-farmacia">Añadir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 5 -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <span class="badge bg-warning text-dark badge-promo">Oferta</span>
+                                <img src="https://www.maicao.cl/dw/image/v2/BDPM_PRD/on/demandware.static/-/Sites-masterCatalog_Chile/default/dw64e857d7/images/large/400298-4-mascarilla-facial-de-arcilla-carbonatada-100grs.jpg?sw=1000&sh=1000" class="card-img-top" alt="Mascarilla Facial">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h5 class="card-title">Mascarilla de Arcilla</h5>
+                                        <span class="text-warning small"><i class="fas fa-star"></i> 4.5</span>
+                                    </div>
+                                    <p class="card-text">Purifica y desintoxica la piel. Ideal para poros dilatados y piel grasa.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="product-price">$9.99</span>
+                                        <button class="btn btn-sm btn-farmacia">Añadir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 6 -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://www.cerave.pe/-/media/project/loreal/brand-sites/cerave/americas/pe/new_product/new_product_700x875/hidratantes/crema-reparadora-para-el-contorno-de-ojos-14ml/3337875597272_7.jpg?rev=-1" class="card-img-top" alt="Contorno de Ojos">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h5 class="card-title">Contorno de Ojos</h5>
+                                        <span class="text-warning small"><i class="fas fa-star"></i> 4.4</span>
+                                    </div>
+                                    <p class="card-text">Reduce ojeras y bolsas. Hidrata y suaviza la delicada piel del contorno.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="product-price">$18.50</span>
+                                        <button class="btn btn-sm btn-farmacia">Añadir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Paginación -->
+                    <nav aria-label="Page navigation example" class="mt-4">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de beneficios -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">Beneficios de una Rutina de Cuidado Facial</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <div class="decorative-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h5>Protección Diaria</h5>
+                        <p>Los productos de cuidado facial crean una barrera protectora contra contaminantes y agresores externos.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <div class="decorative-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h5>Hidratación Profunda</h5>
+                        <p>Mantienen la piel hidratada, previniendo la sequedad y el envejecimiento prematuro.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <div class="decorative-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <h5>Mejora la Autoestima</h5>
+                        <p>Una piel saludable mejora la confianza y te hace sentir mejor contigo mismo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><i class="fas fa-spa me-2"></i>FarmaJoven</h5>
+                    <p>Tu farmacia de confianza con los mejores productos para el cuidado de tu piel.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-light">Inicio</a></li>
+                        <li><a href="medicamentos.html" class="text-light">Medicamentos</a></li>
+                        <li><a href="cuidado-personal.html" class="text-light">Cuidado Personal</a></li>
+                        <li><a href="vitaminas.html" class="text-light">Vitaminas</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Síguenos</h5>
+                    <div class="mt-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-0 mb-4" style="border-color: rgba(255,255,255,0.1)">
+            <p class="mb-0">© 2023 FarmaJoven. Todos los derechos reservados.</p>
+            <div class="mt-3">
+                <a href="index.html" class="btn btn-sm btn-light">
+                    <i class="fas fa-home me-2"></i>Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

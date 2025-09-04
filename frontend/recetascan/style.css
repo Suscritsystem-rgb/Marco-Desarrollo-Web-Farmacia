@@ -1,0 +1,8 @@
+
+.recetascan-container{max-width:900px;margin:2rem auto;padding:2rem;background:#fff;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,.08)}
+.results-section .card{color:#fff;font-weight:500}
+.results-section .card.disponible{background-color:#28a745}
+.results-section .card.no-disponible{background-color:#dc3545}
+.results-section .card.sugerencia{background-color:#ffc107;color:#212529}
+#medication-results>div{min-width:260px}
+
