@@ -10,7 +10,9 @@
     "express": "^4.19.2",
     "sqlite3": "^5.1.7",
     "node-fetch": "^2.7.0",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "express-session": "^1.17.3",
+    "bcryptjs": "^2.4.3",
+    "express-rate-limit": "^7.4.0"
   }
 }
-
