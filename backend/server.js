@@ -13,6 +13,9 @@ app.use(express.json());
 // Servir archivos estáticos del frontend
 app.use(express.static(path.join(__dirname, '../frontend')));
 
+// Array temporal para simular carrito en memoria (en producción sería base de datos)
+let carritoItems = [];
+
 // Ruta para validar stock de medicamentos
 app.post("/validar-stock", (req, res) => {
   const { medicamentos } = req.body;
@@ -51,6 +54,100 @@ app.post("/validar-stock", (req, res) => {
         }
       }
     );
+  });
+});
+
+// RUTAS DEL CARRITO
+// Obtener items del carrito
+app.get("/api/carrito", (req, res) => {
+  res.json(carritoItems);
+});
+
+// Agregar item al carrito
+app.post("/api/carrito/agregar", (req, res) => {
+  const { id, nombre, precio, imagen, categoria } = req.body;
+  
+  if (!id || !nombre || !precio) {
+    return res.status(400).json({ error: "Datos incompletos del producto" });
+  }
+
+  // Verificar si el producto ya existe en el carrito
+  const itemExistente = carritoItems.find(item => item.id === id);
+  
+  if (itemExistente) {
+    itemExistente.cantidad += 1;
+  } else {
+    carritoItems.push({
+      id,
+      nombre,
+      precio: parseFloat(precio),
+      imagen: imagen || 'https://via.placeholder.com/150',
+      categoria: categoria || 'General',
+      cantidad: 1
+    });
+  }
+  
+  res.json({ message: "Producto agregado al carrito", carrito: carritoItems });
+});
+
+// Actualizar cantidad de un item
+app.put("/api/carrito/actualizar/:id", (req, res) => {
+  const { id } = req.params;
+  const { cantidad } = req.body;
+  
+  const item = carritoItems.find(item => item.id === id);
+  if (item) {
+    item.cantidad = parseInt(cantidad);
+    if (item.cantidad <= 0) {
+      carritoItems = carritoItems.filter(item => item.id !== id);
+    }
+    res.json({ message: "Carrito actualizado", carrito: carritoItems });
+  } else {
+    res.status(404).json({ error: "Producto no encontrado en el carrito" });
+  }
+});
+
+// Eliminar item del carrito
+app.delete("/api/carrito/eliminar/:id", (req, res) => {
+  const { id } = req.params;
+  carritoItems = carritoItems.filter(item => item.id !== id);
+  res.json({ message: "Producto eliminado del carrito", carrito: carritoItems });
+});
+
+// Limpiar carrito
+app.delete("/api/carrito/limpiar", (req, res) => {
+  carritoItems = [];
+  res.json({ message: "Carrito limpiado", carrito: carritoItems });
+});
+
+// Procesar pedido (checkout)
+app.post("/api/checkout", (req, res) => {
+  const { datosCliente, metodoPago } = req.body;
+  
+  if (carritoItems.length === 0) {
+    return res.status(400).json({ error: "El carrito está vacío" });
+  }
+  
+  // Simular procesamiento del pedido
+  const total = carritoItems.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+  const numeroPedido = 'PED-' + Date.now();
+  
+  // Limpiar carrito después del pedido
+  const pedidoProcesado = {
+    numeroPedido,
+    items: [...carritoItems],
+    total,
+    datosCliente,
+    metodoPago,
+    fecha: new Date().toISOString(),
+    estado: 'Procesando'
+  };
+  
+  carritoItems = [];
+  
+  res.json({ 
+    message: "Pedido procesado exitosamente", 
+    pedido: pedidoProcesado 
   });
 });
 

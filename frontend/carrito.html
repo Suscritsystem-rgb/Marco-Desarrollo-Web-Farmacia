@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Carrito de Compras - FarmaJoven</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="./assets/global.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-clinic-medical me-2"></i><strong>FarmaJoven</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="medicamentos.html"><i class="fas fa-pills me-1"></i> Medicamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cuidado-personal.html"><i class="fas fa-hand-sparkles me-1"></i> Cuidado Personal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="vitaminas.html"><i class="fas fa-leaf me-1"></i> Vitaminas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cuidado-piel.html"><i class="fas fa-spa me-1"></i> Cuidado de la Piel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="recetascan/index.html"><i class="fas fa-notes-medical me-1"></i> Escanear Receta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contacto"><i class="fas fa-phone-alt me-1"></i> Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="carrito.html">
+                            <i class="fas fa-shopping-cart me-1"></i> Carrito
+                            <span class="badge bg-danger ms-1 carrito-contador" style="display: none;">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2><i class="fas fa-shopping-cart me-3"></i>Mi Carrito</h2>
+                    <button class="btn btn-outline-danger" onclick="carritoManager.limpiarCarrito()">
+                        <i class="fas fa-trash me-2"></i>Limpiar Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Items del Carrito -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Productos en tu carrito</h5>
+                        <div id="carrito-items">
+                            <!-- Los items se cargarán dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen del Pedido -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Resumen del Pedido</h5>
+                        
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Subtotal:</span>
+                            <span id="carrito-total">$0.00</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Envío:</span>
+                            <span class="text-success">Gratis</span>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="d-flex justify-content-between mb-4 fw-bold fs-5">
+                            <span>Total:</span>
+                            <span id="carrito-total-final">$0.00</span>
+                        </div>
+                        
+                        <button class="btn btn-primary w-100 mb-3" onclick="irACheckout()">
+                            <i class="fas fa-credit-card me-2"></i>Proceder al Checkout
+                        </button>
+                        
+                        <a href="index.html" class="btn btn-outline-secondary w-100">
+                            <i class="fas fa-arrow-left me-2"></i>Continuar Comprando
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Información de Envío -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h6 class="card-title"><i class="fas fa-truck me-2"></i>Información de Envío</h6>
+                        <ul class="list-unstyled small">
+                            <li><i class="fas fa-check text-success me-2"></i>Envío gratis en compras mayores a $50</li>
+                            <li><i class="fas fa-clock text-info me-2"></i>Entrega en 24-48 horas</li>
+                            <li><i class="fas fa-shield-alt text-primary me-2"></i>Compra 100% segura</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-primary text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0">© 2023 FarmaJoven. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Carrito JS -->
+    <script src="./assets/carrito.js"></script>
+    
+    <script>
+        function irACheckout() {
+            if (carritoManager.carrito.length === 0) {
+                carritoManager.mostrarNotificacion('El carrito está vacío', 'error');
+                return;
+            }
+            window.location.href = 'checkout.html';
+        }
+
+        // Actualizar el total final cuando se actualice el carrito
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new MutationObserver(function() {
+                const total = document.getElementById('carrito-total').textContent;
+                document.getElementById('carrito-total-final').textContent = total;
+            });
+            
+            const targetNode = document.getElementById('carrito-total');
+            if (targetNode) {
+                observer.observe(targetNode, { childList: true, subtree: true });
+            }
+        });
+    </script>
+</body>
+</html>
