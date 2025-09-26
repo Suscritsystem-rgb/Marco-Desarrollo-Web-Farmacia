@@ -17,6 +17,8 @@ Desarrollo-Web-Farmacia/
 │   ├── cuidado-personal.html # Página de cuidado personal
 │   ├── cuidado-piel.html  # Página de cuidado de la piel
 │   ├── vitaminas.html     # Página de vitaminas
+│   ├── carrito.html       # Carrito de compras
+│   ├── checkout.html      # Pagina para pagar
 │   │
 │   ├── recetascan/        # Submódulo para RecetaScan
 │   │   ├── index.html     # Página principal del escáner
@@ -47,6 +49,7 @@ Desarrollo-Web-Farmacia/
 - **Catálogo de Productos**: Medicamentos, cuidado personal, vitaminas, cuidado de la piel
 - **RecetaScan**: Módulo para escanear recetas médicas
 - **API Backend**: Gestión de productos y datos con SQLite
+- **Carrito y Checkout**: Agregar productos al carrito y realizar la compra
 
 ## Tecnologías Utilizadas
 
